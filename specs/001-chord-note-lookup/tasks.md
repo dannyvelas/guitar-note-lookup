@@ -130,7 +130,7 @@ tests/
 
 - [X] T024 [P] Pass over `src/styles.css` for one-handed mobile usability on the fretboard grid and settings panel (per plan.md Constraints)
 - [X] T025 [P] Add guard messaging in `src/lib/app.js` for out-of-range capo values or malformed custom tuning note entries
-- [ ] T026 Run every step in `quickstart.md` end-to-end and fix any discrepancies found — **NOT completed by the agent**: no browser automation tool was available this session (Claude in Chrome was declined). Logic was traced by hand against every quickstart step and all `node --test` unit tests pass, but the UI itself has not been click-tested live. Run `python3 -m http.server 8000 --directory src` (or open `src/index.html` directly) and walk through quickstart.md yourself before considering this task done.
+- [ ] T026 Run every step in `quickstart.md` end-to-end and fix any discrepancies found — **NOT completed by the agent**: no browser automation tool was available this session (Claude in Chrome was declined). Logic was traced by hand against every quickstart step and all `node --test` unit tests pass, but the UI itself has not been click-tested live. **Must be served over http, not opened as a `file://` URL** — the app's ES modules (`import`/`export`) are blocked by browsers when loaded from disk directly. Run `npm start` (serves `src/` at `http://localhost:8000`, see quickstart.md) and walk through quickstart.md yourself before considering this task done.
 
 ---
 
