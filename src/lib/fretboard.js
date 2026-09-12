@@ -25,7 +25,9 @@ export function createFretboard(container, { capo, onSelectionChange }) {
     const table = document.createElement('table');
     table.className = 'fretboard';
 
-    for (let stringIndex = STRING_COUNT; stringIndex >= 1; stringIndex -= 1) {
+    // String 1 (highest-pitched) on top, String 6 (lowest-pitched) on bottom —
+    // standard guitar string numbering and tab layout.
+    for (let stringIndex = 1; stringIndex <= STRING_COUNT; stringIndex += 1) {
       const row = document.createElement('tr');
 
       const label = document.createElement('th');

@@ -1,8 +1,10 @@
 import { parseNote } from './notes.js';
 
+// String 1 = highest-pitched/thinnest string, String 6 = lowest-pitched/thickest —
+// standard guitar string numbering.
 export const PRESETS = {
-  Standard: ['E2', 'A2', 'D3', 'G3', 'B3', 'E4'],
-  'Drop D': ['D2', 'A2', 'D3', 'G3', 'B3', 'E4'],
+  Standard: ['E4', 'B3', 'G3', 'D3', 'A2', 'E2'],
+  'Drop D': ['E4', 'B3', 'G3', 'D3', 'A2', 'D2'],
 };
 
 /** Builds a StringTuning[6] array from a named preset (see data-model.md). */
