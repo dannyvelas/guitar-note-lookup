@@ -1,0 +1,8 @@
+{
+  "name": "guitar-chord-transcriber",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

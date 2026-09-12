@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fretboard Chord Note Lookup</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Fretboard Chord Note Lookup</h1>
+  </header>
+
+  <section id="settings-panel" aria-label="Tuning and capo settings">
+    <div class="settings-row">
+      <label for="tuning-preset">Tuning</label>
+      <select id="tuning-preset">
+        <option value="Drop D">Drop D</option>
+        <option value="Standard">Standard</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+    <div id="tuning-strings" class="settings-row"></div>
+    <div class="settings-row">
+      <label for="capo-input">Capo fret (0 = no capo)</label>
+      <input id="capo-input" type="number" min="0" max="12" step="1" value="2" />
+    </div>
+    <p id="settings-error" class="error" hidden></p>
+  </section>
+
+  <section id="fretboard-section" aria-label="Fretboard">
+    <div id="fretboard"></div>
+    <button id="clear-button" type="button">Clear</button>
+  </section>
+
+  <section id="results-section" aria-label="Resulting notes">
+    <h2>Notes</h2>
+    <div id="results"></div>
+  </section>
+
+  <script type="module" src="lib/app.js"></script>
+</body>
+</html>

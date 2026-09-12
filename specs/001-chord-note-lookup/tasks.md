@@ -42,9 +42,9 @@ tests/
 
 **Purpose**: Project scaffolding — no logic yet
 
-- [ ] T001 Create the project structure per plan.md: `src/`, `src/lib/`, `tests/` directories with empty placeholder files (`src/lib/notes.js`, `src/lib/tuning.js`, `src/lib/fretboard.js`, `src/lib/app.js`, `tests/notes.test.js`)
-- [ ] T002 [P] Create `src/index.html` page skeleton with three empty containers (settings panel, fretboard grid, results row) and a `<script type="module" src="lib/app.js">` tag
-- [ ] T003 [P] Create `src/styles.css` with a mobile-first baseline layout (single-column stack, touch-sized tap targets ≥44px) and link it from `src/index.html`
+- [X] T001 Create the project structure per plan.md: `src/`, `src/lib/`, `tests/` directories with empty placeholder files (`src/lib/notes.js`, `src/lib/tuning.js`, `src/lib/fretboard.js`, `src/lib/app.js`, `tests/notes.test.js`)
+- [X] T002 [P] Create `src/index.html` page skeleton with three empty containers (settings panel, fretboard grid, results row) and a `<script type="module" src="lib/app.js">` tag
+- [X] T003 [P] Create `src/styles.css` with a mobile-first baseline layout (single-column stack, touch-sized tap targets ≥44px) and link it from `src/index.html`
 
 ---
 
@@ -54,11 +54,11 @@ tests/
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T004 [P] Implement `Pitch` semitone conversion helpers in `src/lib/notes.js`: parse a note string (e.g., `"D2"`) into a semitone number and back into `{letter, accidental, octave}` using sharp-only spelling, per [data-model.md](data-model.md) and [research.md](research.md)
-- [ ] T005 [P] Implement `TuningPreset` data (Standard: E2 A2 D3 G3 B3 E4; Drop D: D2 A2 D3 G3 B3 E4) and a `getDefaultTuning()` helper returning Drop D in `src/lib/tuning.js`, per FR-001/FR-002
-- [ ] T006 Implement `pitchAtFret(openPitch, fret)` in `src/lib/notes.js` per [contracts/note-engine.md](contracts/note-engine.md) (depends on T004)
-- [ ] T007 Implement `resolveChord(tuning, capo, selections)` and `isFretSelectable(fret, capo)` in `src/lib/notes.js` per [contracts/note-engine.md](contracts/note-engine.md) (depends on T006)
-- [ ] T008 Initialize shared app state — current tuning (default Drop D via T005), capo (default fret 2, FR-004), and empty `FretboardSelection` — as a small state module in `src/lib/app.js` (depends on T005)
+- [X] T004 [P] Implement `Pitch` semitone conversion helpers in `src/lib/notes.js`: parse a note string (e.g., `"D2"`) into a semitone number and back into `{letter, accidental, octave}` using sharp-only spelling, per [data-model.md](data-model.md) and [research.md](research.md)
+- [X] T005 [P] Implement `TuningPreset` data (Standard: E2 A2 D3 G3 B3 E4; Drop D: D2 A2 D3 G3 B3 E4) and a `getDefaultTuning()` helper returning Drop D in `src/lib/tuning.js`, per FR-001/FR-002
+- [X] T006 Implement `pitchAtFret(openPitch, fret)` in `src/lib/notes.js` per [contracts/note-engine.md](contracts/note-engine.md) (depends on T004)
+- [X] T007 Implement `resolveChord(tuning, capo, selections)` and `isFretSelectable(fret, capo)` in `src/lib/notes.js` per [contracts/note-engine.md](contracts/note-engine.md) (depends on T006)
+- [X] T008 Initialize shared app state — current tuning (default Drop D via T005), capo (default fret 2, FR-004), and empty `FretboardSelection` — as a small state module in `src/lib/app.js` (depends on T005)
 
 **Checkpoint**: Note engine and default state are complete and unit-testable; no UI exists yet.
 
@@ -72,17 +72,17 @@ tests/
 
 ### Tests for User Story 1
 
-- [ ] T009 [P] [US1] Unit tests for `pitchAtFret` in `tests/notes.test.js` covering a plain fret offset, an accidental (sharp) result, and octave rollover (e.g., B2 + 2 frets → C#3)
-- [ ] T010 [P] [US1] Unit tests for `resolveChord` in `tests/notes.test.js` covering: a fretted string (FR-010), an unselected string resolving to open-with-capo (FR-011), and all 6 strings returned together ordered by string index (FR-012)
+- [X] T009 [P] [US1] Unit tests for `pitchAtFret` in `tests/notes.test.js` covering a plain fret offset, an accidental (sharp) result, and octave rollover (e.g., B2 + 2 frets → C#3)
+- [X] T010 [P] [US1] Unit tests for `resolveChord` in `tests/notes.test.js` covering: a fretted string (FR-010), an unselected string resolving to open-with-capo (FR-011), and all 6 strings returned together ordered by string index (FR-012)
 
 ### Implementation for User Story 1
 
-- [ ] T011 [US1] Render the interactive fretboard grid (6 strings × frets 0–24) into its container in `src/lib/fretboard.js`
-- [ ] T012 [US1] Implement click/tap selection handling with single-selection-per-string replace semantics (FR-007, FR-008) in `src/lib/fretboard.js` (depends on T011)
-- [ ] T013 [US1] Disable/hide grid cells before the current capo using `isFretSelectable` (FR-009, edge case: capo blocks earlier frets) in `src/lib/fretboard.js` (depends on T007, T012)
-- [ ] T014 [US1] Render the 6-row results display, one row per string in string order, in `src/lib/app.js` (depends on T007)
-- [ ] T015 [US1] Wire fretboard selection changes to `resolveChord` and re-render the results row on every change (FR-013) in `src/lib/app.js` (depends on T012, T014)
-- [ ] T016 [US1] Bootstrap the fretboard and results row into `src/index.html` on page load, using the default state from T008, in `src/lib/app.js` (depends on T015)
+- [X] T011 [US1] Render the interactive fretboard grid (6 strings × frets 0–24) into its container in `src/lib/fretboard.js`
+- [X] T012 [US1] Implement click/tap selection handling with single-selection-per-string replace semantics (FR-007, FR-008) in `src/lib/fretboard.js` (depends on T011)
+- [X] T013 [US1] Disable/hide grid cells before the current capo using `isFretSelectable` (FR-009, edge case: capo blocks earlier frets) in `src/lib/fretboard.js` (depends on T007, T012)
+- [X] T014 [US1] Render the 6-row results display, one row per string in string order, in `src/lib/app.js` (depends on T007)
+- [X] T015 [US1] Wire fretboard selection changes to `resolveChord` and re-render the results row on every change (FR-013) in `src/lib/app.js` (depends on T012, T014)
+- [X] T016 [US1] Bootstrap the fretboard and results row into `src/index.html` on page load, using the default state from T008, in `src/lib/app.js` (depends on T015)
 
 **Checkpoint**: User Story 1 is fully functional and independently testable — a user can select fret positions against the default Drop D/capo-2 setup and see all 6 notes.
 
@@ -96,14 +96,14 @@ tests/
 
 ### Tests for User Story 2
 
-- [ ] T017 [P] [US2] Unit tests for `resolveChord` in `tests/notes.test.js` covering a custom (non-preset) tuning and a `capo = 0` ("no capo") case, confirming unselected strings return their true open note
+- [X] T017 [P] [US2] Unit tests for `resolveChord` in `tests/notes.test.js` covering a custom (non-preset) tuning and a `capo = 0` ("no capo") case, confirming unselected strings return their true open note
 
 ### Implementation for User Story 2
 
-- [ ] T018 [P] [US2] Add the settings panel markup to `src/index.html`: a tuning preset selector, 6 per-string custom note inputs, and a capo number input (including a "no capo" value)
-- [ ] T019 [US2] Implement preset selection (overwrites all 6 strings) and per-string custom overrides, updating the shared tuning state, in `src/lib/tuning.js` (depends on T005, T018)
-- [ ] T020 [US2] Implement capo input handling in `src/lib/app.js`, including removing/replacing any existing fret selection that the new capo makes invalid (fret < new capo), consistent with FR-009 (depends on T013, T018)
-- [ ] T021 [US2] Recompute and re-render results immediately whenever tuning or capo changes (FR-013) in `src/lib/app.js` (depends on T015, T019, T020)
+- [X] T018 [P] [US2] Add the settings panel markup to `src/index.html`: a tuning preset selector, 6 per-string custom note inputs, and a capo number input (including a "no capo" value)
+- [X] T019 [US2] Implement preset selection (overwrites all 6 strings) and per-string custom overrides, updating the shared tuning state, in `src/lib/tuning.js` (depends on T005, T018)
+- [X] T020 [US2] Implement capo input handling in `src/lib/app.js`, including removing/replacing any existing fret selection that the new capo makes invalid (fret < new capo), consistent with FR-009 (depends on T013, T018)
+- [X] T021 [US2] Recompute and re-render results immediately whenever tuning or capo changes (FR-013) in `src/lib/app.js` (depends on T015, T019, T020)
 
 **Checkpoint**: User Stories 1 AND 2 both work independently — tuning and capo are configurable and every change live-updates the results.
 
@@ -117,8 +117,8 @@ tests/
 
 ### Implementation for User Story 3
 
-- [ ] T022 [US3] Add a Clear action control to `src/index.html`
-- [ ] T023 [US3] Implement the clear handler in `src/lib/app.js`: empty the `FretboardSelection`, reset the fretboard grid's visual state, and re-render results to all open-with-capo values (FR-014, FR-015) (depends on T015)
+- [X] T022 [US3] Add a Clear action control to `src/index.html`
+- [X] T023 [US3] Implement the clear handler in `src/lib/app.js`: empty the `FretboardSelection`, reset the fretboard grid's visual state, and re-render results to all open-with-capo values (FR-014, FR-015) (depends on T015)
 
 **Checkpoint**: All 3 user stories are independently functional.
 
@@ -128,9 +128,9 @@ tests/
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T024 [P] Pass over `src/styles.css` for one-handed mobile usability on the fretboard grid and settings panel (per plan.md Constraints)
-- [ ] T025 [P] Add guard messaging in `src/lib/app.js` for out-of-range capo values or malformed custom tuning note entries
-- [ ] T026 Run every step in `quickstart.md` end-to-end and fix any discrepancies found
+- [X] T024 [P] Pass over `src/styles.css` for one-handed mobile usability on the fretboard grid and settings panel (per plan.md Constraints)
+- [X] T025 [P] Add guard messaging in `src/lib/app.js` for out-of-range capo values or malformed custom tuning note entries
+- [ ] T026 Run every step in `quickstart.md` end-to-end and fix any discrepancies found — **NOT completed by the agent**: no browser automation tool was available this session (Claude in Chrome was declined). Logic was traced by hand against every quickstart step and all `node --test` unit tests pass, but the UI itself has not been click-tested live. Run `python3 -m http.server 8000 --directory src` (or open `src/index.html` directly) and walk through quickstart.md yourself before considering this task done.
 
 ---
 

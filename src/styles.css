@@ -1,0 +1,152 @@
+:root {
+  color-scheme: light dark;
+  --bg: #fafafa;
+  --fg: #1a1a1a;
+  --accent: #2f6fed;
+  --border: #ccc;
+  --disabled-bg: #eee;
+  --disabled-fg: #999;
+  --error: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --fg: #eee;
+    --border: #444;
+    --disabled-bg: #22252b;
+    --disabled-fg: #777;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  padding-bottom: 32px;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+header h1 {
+  font-size: 1.25rem;
+  margin: 0 0 16px;
+}
+
+section {
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+
+.settings-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+#tuning-strings {
+  gap: 12px;
+}
+
+.tuning-string {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  gap: 2px;
+}
+
+.tuning-string input {
+  width: 4.5em;
+}
+
+select,
+input[type='number'],
+input[type='text'] {
+  min-height: 44px;
+  font-size: 1rem;
+  padding: 4px 8px;
+}
+
+.error {
+  color: var(--error);
+  font-size: 0.9rem;
+  margin: 4px 0 0;
+}
+
+#fretboard-section {
+  overflow-x: auto;
+}
+
+table.fretboard {
+  border-collapse: collapse;
+  touch-action: manipulation;
+}
+
+table.fretboard th,
+table.fretboard td.fret-cell {
+  border: 1px solid var(--border);
+  min-width: 44px;
+  height: 44px;
+  text-align: center;
+  padding: 4px;
+  font-size: 0.85rem;
+}
+
+table.fretboard th {
+  position: sticky;
+  left: 0;
+  background: var(--bg);
+}
+
+td.fret-cell {
+  cursor: pointer;
+  user-select: none;
+}
+
+td.fret-cell--disabled {
+  background: var(--disabled-bg);
+  color: var(--disabled-fg);
+  cursor: not-allowed;
+}
+
+td.fret-cell--selected {
+  background: var(--accent);
+  color: #fff;
+  font-weight: bold;
+}
+
+#clear-button {
+  margin-top: 12px;
+  min-height: 44px;
+  min-width: 96px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 320px;
+}
+
+.results-list li {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+}
