@@ -54,19 +54,10 @@ h2 {
   margin-bottom: 8px;
 }
 
-#tuning-strings {
-  gap: 12px;
-}
-
-.tuning-string {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.8rem;
-  gap: 2px;
-}
-
-.tuning-string input {
-  width: 4.5em;
+.hint {
+  font-size: 0.85rem;
+  color: var(--disabled-fg);
+  margin: 0 0 8px;
 }
 
 select,
@@ -106,6 +97,30 @@ table.fretboard th {
   position: sticky;
   left: 0;
   background: var(--bg);
+  min-width: 110px;
+  padding: 4px 8px;
+}
+
+.fretboard__string-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.fretboard__string-number {
+  font-weight: bold;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.fretboard__string-note {
+  width: 3.5em;
+  min-height: 32px;
+  font-size: 0.85rem;
+  padding: 2px 4px;
+  text-align: center;
 }
 
 td.fret-cell {

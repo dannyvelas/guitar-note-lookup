@@ -11,7 +11,6 @@ let capo = DEFAULT_CAPO;
 const fretboardContainer = document.getElementById('fretboard');
 const resultsContainer = document.getElementById('results');
 const tuningPresetSelect = document.getElementById('tuning-preset');
-const tuningStringsContainer = document.getElementById('tuning-strings');
 const capoInput = document.getElementById('capo-input');
 const clearButton = document.getElementById('clear-button');
 const errorEl = document.getElementById('settings-error');
@@ -43,40 +42,21 @@ function renderResults(selections) {
   resultsContainer.appendChild(list);
 }
 
-function renderTuningInputs() {
-  tuningStringsContainer.innerHTML = '';
-  for (const { stringIndex, openNote } of tuning) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'tuning-string';
-
-    const label = document.createElement('label');
-    label.htmlFor = `string-${stringIndex}`;
-    label.textContent = `String ${stringIndex}`;
-
-    const input = document.createElement('input');
-    input.id = `string-${stringIndex}`;
-    input.type = 'text';
-    input.value = openNote;
-    input.addEventListener('change', () => {
-      try {
-        tuning = setStringOpenNote(tuning, stringIndex, input.value.trim());
-        tuningPresetSelect.value = 'custom';
-        clearError();
-        renderResults(fretboard.getSelections());
-      } catch (err) {
-        showError(err.message);
-        input.value = openNote;
-      }
-    });
-
-    wrapper.append(label, input);
-    tuningStringsContainer.appendChild(wrapper);
-  }
-}
-
 const fretboard = createFretboard(fretboardContainer, {
   capo,
+  tuning,
   onSelectionChange: renderResults,
+  onTuningChange: (stringIndex, openNoteText) => {
+    try {
+      tuning = setStringOpenNote(tuning, stringIndex, openNoteText);
+      tuningPresetSelect.value = 'custom';
+      clearError();
+    } catch (err) {
+      showError(err.message);
+    }
+    fretboard.setTuning(tuning); // re-renders the row inputs, reverting a rejected edit
+    renderResults(fretboard.getSelections());
+  },
 });
 
 tuningPresetSelect.addEventListener('change', () => {
@@ -85,7 +65,7 @@ tuningPresetSelect.addEventListener('change', () => {
     return;
   }
   tuning = presetToTuning(value);
-  renderTuningInputs();
+  fretboard.setTuning(tuning);
   clearError();
   renderResults(fretboard.getSelections());
 });
@@ -106,5 +86,4 @@ clearButton.addEventListener('click', () => {
   fretboard.clear(); // FR-014, FR-015
 });
 
-renderTuningInputs();
 renderResults(fretboard.getSelections());

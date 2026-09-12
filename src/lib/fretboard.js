@@ -7,17 +7,29 @@ const MAX_FRET = 24;
  * Renders an interactive 6-string fretboard grid into `container` and owns
  * the current FretboardSelection (at most one fret per string).
  *
+ * Each row's header doubles as that string's tuning input, so there's no
+ * separate list to visually cross-reference against which row is which
+ * string — editing a string's open note happens right on its own row.
+ *
  * `onSelectionChange(selections)` fires after every selection, capo change,
  * or clear, with a plain { stringIndex: fret } map (FR-013).
+ * `onTuningChange(stringIndex, openNoteText)` fires when a row's note input
+ * is edited; the caller validates/applies it and calls `setTuning` back with
+ * the resulting tuning (whether the edit was accepted or rejected).
  */
-export function createFretboard(container, { capo, onSelectionChange }) {
+export function createFretboard(container, { capo, tuning, onSelectionChange, onTuningChange }) {
   let currentCapo = capo;
+  let currentTuning = tuning;
   let selections = {};
 
   function selectFret(stringIndex, fret) {
     selections = { ...selections, [stringIndex]: fret };
     render();
     onSelectionChange(getSelections());
+  }
+
+  function openNoteFor(stringIndex) {
+    return currentTuning.find((entry) => entry.stringIndex === stringIndex).openNote;
   }
 
   function render() {
@@ -30,10 +42,30 @@ export function createFretboard(container, { capo, onSelectionChange }) {
     for (let stringIndex = 1; stringIndex <= STRING_COUNT; stringIndex += 1) {
       const row = document.createElement('tr');
 
-      const label = document.createElement('th');
-      label.scope = 'row';
-      label.textContent = `S${stringIndex}`;
-      row.appendChild(label);
+      const headerCell = document.createElement('th');
+      headerCell.scope = 'row';
+
+      // A `<th>` needs to stay a table-cell to line up with the row's other
+      // cells, so the flex layout for its contents lives on this inner div.
+      const headerContent = document.createElement('div');
+      headerContent.className = 'fretboard__string-header';
+
+      const numberLabel = document.createElement('span');
+      numberLabel.className = 'fretboard__string-number';
+      numberLabel.textContent = `S${stringIndex}`;
+
+      const noteInput = document.createElement('input');
+      noteInput.type = 'text';
+      noteInput.className = 'fretboard__string-note';
+      noteInput.value = openNoteFor(stringIndex);
+      noteInput.setAttribute('aria-label', `String ${stringIndex} open note`);
+      noteInput.addEventListener('change', () => {
+        onTuningChange(stringIndex, noteInput.value.trim());
+      });
+
+      headerContent.append(numberLabel, noteInput);
+      headerCell.appendChild(headerContent);
+      row.appendChild(headerCell);
 
       for (let fret = 0; fret <= MAX_FRET; fret += 1) {
         const cell = document.createElement('td');
@@ -83,7 +115,13 @@ export function createFretboard(container, { capo, onSelectionChange }) {
     onSelectionChange(getSelections());
   }
 
+  /** Replaces the tuning shown in each row's note input (e.g. after a preset change or an edit). */
+  function setTuning(newTuning) {
+    currentTuning = newTuning;
+    render();
+  }
+
   render();
 
-  return { setCapo, clear, getSelections };
+  return { setCapo, setTuning, clear, getSelections };
 }
