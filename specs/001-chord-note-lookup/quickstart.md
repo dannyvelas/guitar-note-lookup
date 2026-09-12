@@ -2,25 +2,23 @@
 
 ## Prerequisites
 
-- A modern browser.
-- Node.js (any current LTS) — used both to serve the app locally and to run the note-engine unit tests.
+- A modern browser (no install needed for using the app).
+- Node.js (any current LTS) only if you want to run the note-engine unit tests.
 
 ## Run the app
 
-The app's JS is written as ES modules (`import`/`export`), which browsers refuse to load over `file://` — opening `src/index.html` by double-clicking it will show the static shell (tuning/capo controls) but not the fretboard or results. It must be served over `http://`:
+No build step. Once implemented (Phase 2), the app is a static page:
 
 ```bash
-npm start   # serves src/ at http://localhost:8000 (scripts/serve.js, zero dependencies)
+open src/index.html          # macOS: opens directly in the default browser
+# or serve it (avoids any browser file:// restrictions):
+npx http-server src -p 8080  # then visit http://localhost:8080
 ```
-
-Then open `http://localhost:8000` in a browser. (`PORT=8080 npm start` to use a different port.)
-
-Any other static file server works too, e.g. `npx http-server src -p 8080`.
 
 ## Run the note-engine tests
 
 ```bash
-npm test   # or: node --test
+node --test tests/
 ```
 
 ## Manual validation (maps to spec.md acceptance scenarios)
