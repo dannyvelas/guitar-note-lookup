@@ -51,7 +51,15 @@ test('resolveChord: capo = 0 ("no capo") uses the true open note', () => {
 });
 
 test('isFretSelectable: rejects frets before the capo', () => {
+  assert.equal(isFretSelectable(0, 2), false);
   assert.equal(isFretSelectable(1, 2), false);
-  assert.equal(isFretSelectable(2, 2), true);
+});
+
+test('isFretSelectable: rejects the fret exactly at the capo (redundant)', () => {
+  assert.equal(isFretSelectable(2, 2), false);
+});
+
+test('isFretSelectable: accepts frets above the capo', () => {
+  assert.equal(isFretSelectable(3, 2), true);
   assert.equal(isFretSelectable(5, 2), true);
 });

@@ -42,9 +42,14 @@ export function pitchAtFret(openNote, fret) {
   return formatPitch(openSemitone + fret);
 }
 
-/** A fret is only playable at or beyond the capo — it can't be pressed behind it. */
+/**
+ * A fret is only selectable strictly above the capo: fretting behind the
+ * capo is physically impossible, and fretting exactly at the capo's fret is
+ * redundant — the capo already stops the string there, producing the same
+ * pitch as leaving it unselected.
+ */
 export function isFretSelectable(fret, capo) {
-  return fret >= capo;
+  return fret > capo;
 }
 
 /**
