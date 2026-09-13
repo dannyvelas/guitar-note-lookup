@@ -3,6 +3,13 @@ import { isFretSelectable, pitchAtFret } from './notes.js';
 const STRING_COUNT = 6;
 const MAX_FRET = 24;
 
+// Shared with every <th> in the fretboard table (both the thead row and
+// each string row's own header cell) — reproduces the old
+// `table.fretboard th` rule, including its sticky-header override of the
+// shared border rule's min-width/padding (T010).
+const TH_CLASSES =
+  'border border-app-border h-11 text-center text-[0.85rem] sticky left-0 bg-app-bg min-w-[110px] px-2 py-1';
+
 /**
  * Renders an interactive 6-string fretboard grid into `container` and owns
  * the current FretboardSelection (at most one fret per string).
@@ -48,11 +55,11 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
   function render() {
     container.innerHTML = '';
     const table = document.createElement('table');
-    table.className = 'fretboard';
+    table.className = 'border-collapse touch-manipulation';
 
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    headerRow.innerHTML = `<th></th><th colspan="${MAX_FRET + 1}"></th><th>Note</th>`;
+    headerRow.innerHTML = `<th class="${TH_CLASSES}"></th><th colspan="${MAX_FRET + 1}" class="${TH_CLASSES}"></th><th class="${TH_CLASSES}">Note</th>`;
     thead.appendChild(headerRow);
     table.appendChild(thead);
 
@@ -65,6 +72,7 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
 
       const headerCell = document.createElement('th');
       headerCell.scope = 'row';
+      headerCell.className = TH_CLASSES;
 
       // A `<th>` needs to stay a table-cell to line up with the row's other
       // cells, so the flex layout for its contents lives on this inner div.
@@ -90,7 +98,8 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
 
       for (let fret = 0; fret <= MAX_FRET; fret += 1) {
         const cell = document.createElement('td');
-        cell.className = 'fret-cell';
+        cell.className =
+          'fret-cell border border-app-border min-w-11 h-11 text-center p-1 text-[0.85rem]';
         cell.textContent = String(fret);
 
         const selectable = isFretSelectable(fret, currentCapo);
