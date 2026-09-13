@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node scripts/serve.js",
+    "start": "npm run build:css && node scripts/serve.js",
     "build:css": "tailwindcss -i ./src/tailwind.css -o ./src/styles.css",
+    "postbuild:css": "node scripts/prepend-generated-header.js",
     "watch:css": "npm run build:css -- --watch",
     "test": "node --test"
   },
