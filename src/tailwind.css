@@ -80,51 +80,6 @@
   box-sizing: border-box;
 }
 
-td.fretboard__result {
-  position: sticky;
-  right: 0;
-  background: var(--bg);
-  border-left: 2px solid var(--border);
-  min-width: 64px;
-  padding: 0;
-}
-
-.fretboard__result-button {
-  all: unset;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 44px;
-  min-width: 64px;
-  padding: 4px 8px;
-  font-size: 0.85rem;
-  font-weight: bold;
-  color: var(--accent);
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.fretboard__result-cue {
-  font-size: 0.75rem;
-  opacity: 0.7;
-}
-
-.fretboard__result-button:hover,
-.fretboard__result-button:focus-visible {
-  background: var(--accent);
-  color: #fff;
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
-}
-
-.fretboard__result-button:hover .fretboard__result-cue,
-.fretboard__result-button:focus-visible .fretboard__result-cue {
-  opacity: 1;
-}
-
 #clear-button {
   margin-top: 12px;
   min-height: 44px;
