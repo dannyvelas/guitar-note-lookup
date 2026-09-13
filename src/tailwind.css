@@ -80,28 +80,6 @@
   box-sizing: border-box;
 }
 
-.fretboard__string-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-.fretboard__string-number {
-  font-weight: bold;
-  font-size: 0.8rem;
-  flex-shrink: 0;
-}
-
-.fretboard__string-note {
-  width: 3.5em;
-  min-height: 32px;
-  font-size: 0.85rem;
-  padding: 2px 4px;
-  text-align: center;
-}
-
 td.fretboard__result {
   position: sticky;
   right: 0;
