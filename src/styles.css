@@ -311,25 +311,6 @@
 }
 :root {
   color-scheme: light dark;
-  --bg: #fafafa;
-  --fg: #1a1a1a;
-  --accent: #2f6fed;
-  --border: #ccc;
-  --disabled-bg: #eee;
-  --disabled-fg: #999;
-  --error: #c62828;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14161a;
-    --fg: #eee;
-    --border: #444;
-    --disabled-bg: #22252b;
-    --disabled-fg: #777;
-  }
-}
-* {
-  box-sizing: border-box;
 }
 @property --tw-border-style {
   syntax: "*";
