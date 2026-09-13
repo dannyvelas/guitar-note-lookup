@@ -126,11 +126,17 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
       }
 
       const resultCell = document.createElement('td');
-      resultCell.className = 'fretboard__result';
+      resultCell.className = 'sticky right-0 bg-app-bg border-l-2 border-app-border min-w-16 p-0';
 
       const resultButton = document.createElement('button');
       resultButton.type = 'button';
-      resultButton.className = 'fretboard__result-button';
+      // `[&:hover]:`/`[.group:hover_&]:` (not the built-in hover:/group-hover:)
+      // deliberately match the old plain `:hover` selector exactly — Tailwind's
+      // built-in hover: variant wraps in `@media (hover: hover)`, which the
+      // original CSS never did, so using it here would drop hover styling on
+      // touch devices that don't report true hover support.
+      resultButton.className =
+        '[all:unset] group flex items-center justify-center gap-1 box-border w-full min-h-11 min-w-16 py-1 px-2 text-[0.85rem] font-bold text-app-accent cursor-pointer rounded [&:hover]:bg-app-accent [&:hover]:text-white [&:hover]:outline-2 [&:hover]:outline-app-accent [&:hover]:-outline-offset-2 focus-visible:bg-app-accent focus-visible:text-white focus-visible:outline-2 focus-visible:outline-app-accent focus-visible:-outline-offset-2';
       resultButton.setAttribute('aria-label', `Play string ${stringIndex}'s current note`);
 
       const resultText = document.createElement('span');
@@ -138,7 +144,8 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
       resultText.textContent = String(resultFor(stringIndex));
 
       const resultCue = document.createElement('span');
-      resultCue.className = 'fretboard__result-cue';
+      resultCue.className =
+        'text-xs opacity-70 [.group:hover_&]:opacity-100 group-focus-visible:opacity-100';
       resultCue.setAttribute('aria-hidden', 'true');
       resultCue.textContent = '🔊';
 
