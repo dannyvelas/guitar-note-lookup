@@ -125,23 +125,6 @@ td.fretboard__result {
   opacity: 1;
 }
 
-td.fret-cell {
-  cursor: pointer;
-  user-select: none;
-}
-
-td.fret-cell--disabled {
-  background: var(--disabled-bg);
-  color: var(--disabled-fg);
-  cursor: not-allowed;
-}
-
-td.fret-cell--selected {
-  background: var(--accent);
-  color: #fff;
-  font-weight: bold;
-}
-
 #clear-button {
   margin-top: 12px;
   min-height: 44px;
