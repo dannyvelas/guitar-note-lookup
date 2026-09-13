@@ -42,6 +42,15 @@ export function pitchAtFret(openNote, fret) {
   return formatPitch(openSemitone + fret);
 }
 
+const A4_SEMITONE = parseNote('A4');
+const A4_FREQUENCY_HZ = 440;
+
+/** Converts a pitch (a `Pitch`, note string, or semitone number) into Hz, equal temperament with A4 = 440Hz. */
+export function frequencyForPitch(pitch) {
+  const semitone = typeof pitch === 'number' ? pitch : parseNote(String(pitch));
+  return A4_FREQUENCY_HZ * 2 ** ((semitone - A4_SEMITONE) / 12);
+}
+
 /**
  * A fret is only selectable strictly above the capo: fretting behind the
  * capo is physically impossible, and fretting exactly at the capo's fret is

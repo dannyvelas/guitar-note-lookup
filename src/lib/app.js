@@ -1,5 +1,6 @@
 import { getDefaultTuning, presetToTuning, setStringOpenNote } from './tuning.js';
 import { createFretboard } from './fretboard.js';
+import { createStringSoundPlayer } from './string-sound.js';
 
 const DEFAULT_CAPO = 2; // FR-004
 const MAX_CAPO = 12;
@@ -23,6 +24,8 @@ function clearError() {
   errorEl.textContent = '';
 }
 
+const stringSoundPlayer = createStringSoundPlayer();
+
 const fretboard = createFretboard(fretboardContainer, {
   capo,
   tuning,
@@ -36,6 +39,7 @@ const fretboard = createFretboard(fretboardContainer, {
     }
     fretboard.setTuning(tuning); // re-renders the row inputs and results, reverting a rejected edit
   },
+  onStringSoundRequest: (pitch) => stringSoundPlayer.play(pitch),
 });
 
 tuningPresetSelect.addEventListener('change', () => {

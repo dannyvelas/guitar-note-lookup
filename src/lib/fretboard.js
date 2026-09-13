@@ -14,8 +14,13 @@ const MAX_FRET = 24;
  * `onTuningChange(stringIndex, openNoteText)` fires when a row's note input
  * is edited; the caller validates/applies it and calls `setTuning` back with
  * the resulting tuning (whether the edit was accepted or rejected).
+ *
+ * `onStringSoundRequest(pitch)` fires when a row's result note is clicked,
+ * with that string's currently displayed pitch at the moment of the click
+ * (not a stale value captured at render time) — the caller is responsible
+ * for actually playing a sound.
  */
-export function createFretboard(container, { capo, tuning, onTuningChange }) {
+export function createFretboard(container, { capo, tuning, onTuningChange, onStringSoundRequest }) {
   let currentCapo = capo;
   let currentTuning = tuning;
   let selections = {};
@@ -100,7 +105,36 @@ export function createFretboard(container, { capo, tuning, onTuningChange }) {
 
       const resultCell = document.createElement('td');
       resultCell.className = 'fretboard__result';
-      resultCell.textContent = String(resultFor(stringIndex));
+
+      const resultButton = document.createElement('button');
+      resultButton.type = 'button';
+      resultButton.className = 'fretboard__result-button';
+      resultButton.setAttribute('aria-label', `Play string ${stringIndex}'s current note`);
+
+      const resultText = document.createElement('span');
+      resultText.className = 'fretboard__result-text';
+      resultText.textContent = String(resultFor(stringIndex));
+
+      const resultCue = document.createElement('span');
+      resultCue.className = 'fretboard__result-cue';
+      resultCue.setAttribute('aria-hidden', 'true');
+      resultCue.textContent = '🔊';
+
+      resultButton.append(resultText, resultCue);
+      resultButton.addEventListener('click', () => {
+        if (typeof onStringSoundRequest !== 'function') {
+          return;
+        }
+        let pitch;
+        try {
+          pitch = resultFor(stringIndex);
+        } catch {
+          return; // invalid/indeterminate note — no sound (FR-008)
+        }
+        onStringSoundRequest(pitch);
+      });
+
+      resultCell.appendChild(resultButton);
       row.appendChild(resultCell);
 
       tbody.appendChild(row);

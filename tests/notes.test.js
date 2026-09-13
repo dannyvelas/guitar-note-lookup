@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { pitchAtFret, resolveChord, isFretSelectable } from '../src/lib/notes.js';
+import { pitchAtFret, resolveChord, isFretSelectable, frequencyForPitch } from '../src/lib/notes.js';
 
 test('pitchAtFret: plain fret offset', () => {
   assert.equal(String(pitchAtFret('D2', 3)), 'F2');
@@ -62,4 +62,21 @@ test('isFretSelectable: rejects the fret exactly at the capo (redundant)', () =>
 test('isFretSelectable: accepts frets above the capo', () => {
   assert.equal(isFretSelectable(3, 2), true);
   assert.equal(isFretSelectable(5, 2), true);
+});
+
+test('frequencyForPitch: A4 is 440Hz', () => {
+  assert.equal(frequencyForPitch('A4'), 440);
+});
+
+test('frequencyForPitch: A3 is 220Hz (one octave down)', () => {
+  assert.equal(frequencyForPitch('A3'), 220);
+});
+
+test('frequencyForPitch: C4 (middle C) is ~261.63Hz', () => {
+  assert.ok(Math.abs(frequencyForPitch('C4') - 261.63) < 0.01);
+});
+
+test('frequencyForPitch: accepts a Pitch object (as returned by pitchAtFret)', () => {
+  const pitch = pitchAtFret('A2', 24); // A2 + 24 semitones = A4
+  assert.equal(frequencyForPitch(pitch), 440);
 });

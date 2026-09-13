@@ -44,7 +44,7 @@ tests/
 
 **Purpose**: Scaffolding for the one new module — no logic yet
 
-- [ ] T001 Create empty placeholder files `src/lib/string-sound.js` and `tests/string-sound.test.js` per plan.md Project Structure
+- [X] T001 Create empty placeholder files `src/lib/string-sound.js` and `tests/string-sound.test.js` per plan.md Project Structure
 
 ---
 
@@ -54,7 +54,7 @@ tests/
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T002 In `src/lib/fretboard.js`, change each row's result `<td>` (currently plain text, per `resultFor`) to contain a `<button type="button" class="fretboard__result-button">` showing the same note text — a real interactive element (focusable, keyboard-activatable) that US1 will wire to sound and US2 will style with a visual cue, with no click behavior or styling added yet
+- [X] T002 In `src/lib/fretboard.js`, change each row's result `<td>` (currently plain text, per `resultFor`) to contain a `<button type="button" class="fretboard__result-button">` showing the same note text — a real interactive element (focusable, keyboard-activatable) that US1 will wire to sound and US2 will style with a visual cue, with no click behavior or styling added yet
 
 **Checkpoint**: Every result cell is now a real button; neither sound nor visual cue exists yet.
 
@@ -68,16 +68,16 @@ tests/
 
 ### Tests for User Story 1
 
-- [ ] T003 [P] [US1] Unit tests for `frequencyForPitch` in `tests/notes.test.js` covering `A4` → `440`, `A3` → `220`, and `C4` → `~261.63`, per [contracts/string-sound.md](contracts/string-sound.md)
-- [ ] T004 [P] [US1] Unit tests for `generatePluckedStringBuffer` in `tests/string-sound.test.js` covering: output length equals `sampleRate * durationSeconds`, peak amplitude occurs near the start of the buffer, and overall amplitude trends toward silence by the end (not a flat sustained level), per [contracts/string-sound.md](contracts/string-sound.md)
+- [X] T003 [P] [US1] Unit tests for `frequencyForPitch` in `tests/notes.test.js` covering `A4` → `440`, `A3` → `220`, and `C4` → `~261.63`, per [contracts/string-sound.md](contracts/string-sound.md)
+- [X] T004 [P] [US1] Unit tests for `generatePluckedStringBuffer` in `tests/string-sound.test.js` covering: output length equals `sampleRate * durationSeconds`, peak amplitude occurs near the start of the buffer, and overall amplitude trends toward silence by the end (not a flat sustained level), per [contracts/string-sound.md](contracts/string-sound.md)
 
 ### Implementation for User Story 1
 
-- [ ] T005 [P] [US1] Implement `frequencyForPitch(pitch)` in `src/lib/notes.js` (equal temperament, A4 = 440Hz), per [contracts/string-sound.md](contracts/string-sound.md) (depends on T003)
-- [ ] T006 [P] [US1] Implement `generatePluckedStringBuffer(frequencyHz, sampleRate, durationSeconds)` in `src/lib/string-sound.js` using a Karplus-Strong noise-burst-through-a-feedback-delay-line, per [research.md](research.md) and [contracts/string-sound.md](contracts/string-sound.md) (depends on T004)
-- [ ] T007 [US1] Implement `createStringSoundPlayer()` in `src/lib/string-sound.js`: lazily create/resume one shared `AudioContext` on first call (so the very first click needs no separate "enable audio" step), and expose `play(pitch)` that calls `frequencyForPitch` (T005) and `generatePluckedStringBuffer` (T006), wraps the samples in an `AudioBuffer`, and starts a fresh `AudioBufferSourceNode` per call so overlapping strings (FR-005) and same-string retriggers (FR-006) each play independently (depends on T005, T006)
-- [ ] T008 [P] [US1] In `src/lib/fretboard.js`, wire each row's result button (T002) to call an injected `onStringSoundRequest(pitch)` callback on click, passing that string's currently-displayed pitch at the moment of the click (FR-002, FR-004, FR-007); skip the call entirely if the string's current pitch is invalid/indeterminate (FR-008) (depends on T002)
-- [ ] T009 [US1] In `src/lib/app.js`, instantiate `createStringSoundPlayer()` once and pass its `play` function as `onStringSoundRequest` into `createFretboard` (depends on T007, T008)
+- [X] T005 [P] [US1] Implement `frequencyForPitch(pitch)` in `src/lib/notes.js` (equal temperament, A4 = 440Hz), per [contracts/string-sound.md](contracts/string-sound.md) (depends on T003)
+- [X] T006 [P] [US1] Implement `generatePluckedStringBuffer(frequencyHz, sampleRate, durationSeconds)` in `src/lib/string-sound.js` using a Karplus-Strong noise-burst-through-a-feedback-delay-line, per [research.md](research.md) and [contracts/string-sound.md](contracts/string-sound.md) (depends on T004)
+- [X] T007 [US1] Implement `createStringSoundPlayer()` in `src/lib/string-sound.js`: lazily create/resume one shared `AudioContext` on first call (so the very first click needs no separate "enable audio" step), and expose `play(pitch)` that calls `frequencyForPitch` (T005) and `generatePluckedStringBuffer` (T006), wraps the samples in an `AudioBuffer`, and starts a fresh `AudioBufferSourceNode` per call so overlapping strings (FR-005) and same-string retriggers (FR-006) each play independently (depends on T005, T006)
+- [X] T008 [P] [US1] In `src/lib/fretboard.js`, wire each row's result button (T002) to call an injected `onStringSoundRequest(pitch)` callback on click, passing that string's currently-displayed pitch at the moment of the click (FR-002, FR-004, FR-007); skip the call entirely if the string's current pitch is invalid/indeterminate (FR-008) (depends on T002)
+- [X] T009 [US1] In `src/lib/app.js`, instantiate `createStringSoundPlayer()` once and pass its `play` function as `onStringSoundRequest` into `createFretboard` (depends on T007, T008)
 
 **Checkpoint**: User Story 1 is fully functional and independently testable — clicking any string's result button plays that string's currently displayed note as a guitar pluck, with no visual cue required yet.
 
@@ -91,8 +91,8 @@ tests/
 
 ### Implementation for User Story 2
 
-- [ ] T010 [US2] In `src/lib/fretboard.js`, add a static clickability cue (e.g., a small icon alongside the note text) to the result button's markup (T002), present on every one of the 6 rows at rest (FR-009) (depends on T002; touches the same button element as T008, so implement after US1's T008 lands to avoid overlapping edits)
-- [ ] T011 [P] [US2] In `src/styles.css`, add hover/focus styling for `.fretboard__result-button` that visibly reinforces interactivity beyond the resting cue (FR-010) (depends on T002)
+- [X] T010 [US2] In `src/lib/fretboard.js`, add a static clickability cue (e.g., a small icon alongside the note text) to the result button's markup (T002), present on every one of the 6 rows at rest (FR-009) (depends on T002; touches the same button element as T008, so implement after US1's T008 lands to avoid overlapping edits)
+- [X] T011 [P] [US2] In `src/styles.css`, add hover/focus styling for `.fretboard__result-button` that visibly reinforces interactivity beyond the resting cue (FR-010) (depends on T002)
 
 **Checkpoint**: Both user stories are independently functional — sound plays on click (US1), and every result note visibly invites the click before it happens (US2).
 
@@ -102,8 +102,8 @@ tests/
 
 **Purpose**: Improvements that affect both user stories
 
-- [ ] T012 [P] Pass over `src/styles.css` for consistent affordance styling and touch-sized tap targets (≥44px) across all 6 result buttons (per plan.md, consistent with the existing mobile-usability pass in feature 001)
-- [ ] T013 Run every step in `quickstart.md` end-to-end (audio and visual-cue checks) and fix any discrepancies found
+- [X] T012 [P] Pass over `src/styles.css` for consistent affordance styling and touch-sized tap targets (≥44px) across all 6 result buttons (per plan.md, consistent with the existing mobile-usability pass in feature 001) — done as part of T011's styling (`.fretboard__result-button` has `min-height: 44px; min-width: 64px`)
+- [ ] T013 Run every step in `quickstart.md` end-to-end (audio and visual-cue checks) and fix any discrepancies found — **NOT completed by the agent**: no browser automation tool was available this session (Claude in Chrome was declined). All `node --test` unit tests pass (18/18, covering `frequencyForPitch` and `generatePluckedStringBuffer`'s decay/envelope shape) and the UI wiring was traced by hand against every quickstart step, but audio/visual behavior itself has not been click-tested live. A dev server is running at http://localhost:8000 (`node scripts/serve.js`) — open it and walk through quickstart.md yourself before considering this task done.
 
 ---
 
