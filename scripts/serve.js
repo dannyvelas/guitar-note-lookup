@@ -37,5 +37,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Serving src/ at http://localhost:${PORT} (ES modules require serving over http, not file://)`);
+  console.log(`Serving src/ at http://localhost:${PORT}`);
 });
