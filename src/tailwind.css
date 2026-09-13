@@ -79,20 +79,6 @@
   box-sizing: border-box;
 }
 
-.settings-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.hint {
-  font-size: 0.85rem;
-  color: var(--disabled-fg);
-  margin: 0 0 8px;
-}
-
 select,
 input[type='number'],
 input[type='text'] {

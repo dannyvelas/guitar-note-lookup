@@ -12,7 +12,7 @@
   </header>
 
   <section id="settings-panel" aria-label="Tuning and capo settings" class="mb-6">
-    <div class="settings-row">
+    <div class="flex flex-wrap items-center gap-2 mb-2">
       <label for="tuning-preset">Tuning</label>
       <select id="tuning-preset">
         <option value="Drop D">Drop D</option>
@@ -20,8 +20,8 @@
         <option value="custom">Custom</option>
       </select>
     </div>
-    <p class="hint">Edit an individual string's open note directly on its row in the fretboard below.</p>
-    <div class="settings-row">
+    <p class="text-[0.85rem] text-app-disabled-fg m-0 mb-2">Edit an individual string's open note directly on its row in the fretboard below.</p>
+    <div class="flex flex-wrap items-center gap-2 mb-2">
       <label for="capo-input">Capo fret (0 = no capo)</label>
       <input id="capo-input" type="number" min="0" max="12" step="1" value="2" />
     </div>

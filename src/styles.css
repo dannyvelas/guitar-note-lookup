@@ -8,6 +8,7 @@
     --text-xl--line-height: calc(1.75 / 1.25);
     --color-app-bg: #fafafa;
     --color-app-fg: #1a1a1a;
+    --color-app-disabled-fg: #999;
   }
 }
 @layer utilities {
@@ -31,6 +32,9 @@
   }
   .m-0 {
     margin: 0px;
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
   }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
@@ -56,6 +60,15 @@
   .table-cell {
     display: table-cell;
   }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
   .bg-app-bg {
     background-color: var(--color-app-bg);
   }
@@ -71,6 +84,12 @@
   .text-xl {
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-\[0\.85rem\] {
+    font-size: 0.85rem;
+  }
+  .text-app-disabled-fg {
+    color: var(--color-app-disabled-fg);
   }
   .text-app-fg {
     color: var(--color-app-fg);
@@ -106,18 +125,6 @@
 }
 * {
   box-sizing: border-box;
-}
-.settings-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.hint {
-  font-size: 0.85rem;
-  color: var(--disabled-fg);
-  margin: 0 0 8px;
 }
 select, input[type='number'], input[type='text'] {
   min-height: 44px;
