@@ -1,4 +1,3 @@
-import { resolveChord } from './notes.js';
 import { getDefaultTuning, presetToTuning, setStringOpenNote } from './tuning.js';
 import { createFretboard } from './fretboard.js';
 
@@ -9,7 +8,6 @@ let tuning = getDefaultTuning(); // FR-002
 let capo = DEFAULT_CAPO;
 
 const fretboardContainer = document.getElementById('fretboard');
-const resultsContainer = document.getElementById('results');
 const tuningPresetSelect = document.getElementById('tuning-preset');
 const capoInput = document.getElementById('capo-input');
 const clearButton = document.getElementById('clear-button');
@@ -25,27 +23,9 @@ function clearError() {
   errorEl.textContent = '';
 }
 
-function renderResults(selections) {
-  const chord = resolveChord(tuning, capo, selections);
-  resultsContainer.innerHTML = '';
-  const list = document.createElement('ul');
-  list.className = 'results-list';
-  for (const { stringIndex, effectiveFret, pitch } of chord) {
-    const item = document.createElement('li');
-    const label = document.createElement('span');
-    label.textContent = `String ${stringIndex} (fret ${effectiveFret})`;
-    const value = document.createElement('strong');
-    value.textContent = String(pitch);
-    item.append(label, value);
-    list.appendChild(item);
-  }
-  resultsContainer.appendChild(list);
-}
-
 const fretboard = createFretboard(fretboardContainer, {
   capo,
   tuning,
-  onSelectionChange: renderResults,
   onTuningChange: (stringIndex, openNoteText) => {
     try {
       tuning = setStringOpenNote(tuning, stringIndex, openNoteText);
@@ -54,8 +34,7 @@ const fretboard = createFretboard(fretboardContainer, {
     } catch (err) {
       showError(err.message);
     }
-    fretboard.setTuning(tuning); // re-renders the row inputs, reverting a rejected edit
-    renderResults(fretboard.getSelections());
+    fretboard.setTuning(tuning); // re-renders the row inputs and results, reverting a rejected edit
   },
 });
 
@@ -67,7 +46,6 @@ tuningPresetSelect.addEventListener('change', () => {
   tuning = presetToTuning(value);
   fretboard.setTuning(tuning);
   clearError();
-  renderResults(fretboard.getSelections());
 });
 
 capoInput.addEventListener('change', () => {
@@ -85,5 +63,3 @@ capoInput.addEventListener('change', () => {
 clearButton.addEventListener('click', () => {
   fretboard.clear(); // FR-014, FR-015
 });
-
-renderResults(fretboard.getSelections());

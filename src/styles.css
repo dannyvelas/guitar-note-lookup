@@ -123,6 +123,16 @@ table.fretboard th {
   text-align: center;
 }
 
+td.fretboard__result {
+  position: sticky;
+  right: 0;
+  background: var(--bg);
+  border-left: 2px solid var(--border);
+  min-width: 64px;
+  font-weight: bold;
+  color: var(--accent);
+}
+
 td.fret-cell {
   cursor: pointer;
   user-select: none;
@@ -146,22 +156,4 @@ td.fret-cell--selected {
   min-width: 96px;
   font-size: 1rem;
   cursor: pointer;
-}
-
-.results-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  max-width: 320px;
-}
-
-.results-list li {
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
 }

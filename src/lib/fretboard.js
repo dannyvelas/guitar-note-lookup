@@ -1,4 +1,4 @@
-import { isFretSelectable } from './notes.js';
+import { isFretSelectable, pitchAtFret } from './notes.js';
 
 const STRING_COUNT = 6;
 const MAX_FRET = 24;
@@ -7,17 +7,15 @@ const MAX_FRET = 24;
  * Renders an interactive 6-string fretboard grid into `container` and owns
  * the current FretboardSelection (at most one fret per string).
  *
- * Each row's header doubles as that string's tuning input, so there's no
- * separate list to visually cross-reference against which row is which
- * string — editing a string's open note happens right on its own row.
+ * Each row's header doubles as that string's tuning input, and each row ends
+ * with that string's resulting note (FR-010/FR-011), computed live from the
+ * row's own tuning + capo + selection — no separate list to cross-reference.
  *
- * `onSelectionChange(selections)` fires after every selection, capo change,
- * or clear, with a plain { stringIndex: fret } map (FR-013).
  * `onTuningChange(stringIndex, openNoteText)` fires when a row's note input
  * is edited; the caller validates/applies it and calls `setTuning` back with
  * the resulting tuning (whether the edit was accepted or rejected).
  */
-export function createFretboard(container, { capo, tuning, onSelectionChange, onTuningChange }) {
+export function createFretboard(container, { capo, tuning, onTuningChange }) {
   let currentCapo = capo;
   let currentTuning = tuning;
   let selections = {};
@@ -25,17 +23,30 @@ export function createFretboard(container, { capo, tuning, onSelectionChange, on
   function selectFret(stringIndex, fret) {
     selections = { ...selections, [stringIndex]: fret };
     render();
-    onSelectionChange(getSelections());
   }
 
   function openNoteFor(stringIndex) {
     return currentTuning.find((entry) => entry.stringIndex === stringIndex).openNote;
   }
 
+  function resultFor(stringIndex) {
+    const selectedFret = selections[stringIndex];
+    const effectiveFret = selectedFret === undefined ? currentCapo : selectedFret;
+    return pitchAtFret(openNoteFor(stringIndex), effectiveFret);
+  }
+
   function render() {
     container.innerHTML = '';
     const table = document.createElement('table');
     table.className = 'fretboard';
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    headerRow.innerHTML = `<th></th><th colspan="${MAX_FRET + 1}"></th><th>Note</th>`;
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
 
     // String 1 (highest-pitched) on top, String 6 (lowest-pitched) on bottom —
     // standard guitar string numbering and tab layout.
@@ -86,8 +97,15 @@ export function createFretboard(container, { capo, tuning, onSelectionChange, on
 
         row.appendChild(cell);
       }
-      table.appendChild(row);
+
+      const resultCell = document.createElement('td');
+      resultCell.className = 'fretboard__result';
+      resultCell.textContent = String(resultFor(stringIndex));
+      row.appendChild(resultCell);
+
+      tbody.appendChild(row);
     }
+    table.appendChild(tbody);
     container.appendChild(table);
   }
 
@@ -106,13 +124,11 @@ export function createFretboard(container, { capo, tuning, onSelectionChange, on
     }
     selections = kept;
     render();
-    onSelectionChange(getSelections());
   }
 
   function clear() {
     selections = {};
     render();
-    onSelectionChange(getSelections());
   }
 
   /** Replaces the tuning shown in each row's note input (e.g. after a preset change or an edit). */
