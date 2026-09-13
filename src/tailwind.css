@@ -66,25 +66,18 @@
 }
 
 /* Kept intentionally (not deleted by T004, despite tasks.md's original
-   wording) — this still backs every not-yet-converted element below that
-   combines padding/border with an explicit width/height (table cells,
-   inputs, the result button, etc.) via their own still-present legacy
-   rules. Tailwind has no per-element utility for a universal "*" rule, so
-   the plan is: add the `box-border` utility to each such element as it's
-   individually converted (T007, T010, T011, T013, T014), then delete this
-   rule in T015 once nothing depends on it anymore. Elements with no
-   padding/border + size combination (body, header, section, h2, etc.)
-   never needed this, so T004 does not need to reproduce it for <body>. */
+   wording) — this is unlayered CSS, so it keeps applying to every element
+   (including ones already converted to utility classes, since none of
+   those utilities touch box-sizing) for as long as this rule exists.
+   Tailwind has no per-element utility for a universal "*" rule, so rather
+   than adding `box-border` piecemeal as each consumer below is converted
+   (T007, T010, T011, T013, T014) — unnecessary busywork, since this rule
+   covers them for free in the meantime — the plan is to add `box-border`
+   to exactly the elements that still need it (inputs/select, table cells,
+   the string-note input, the result button, the clear button) all at once
+   in T015, in the same step that deletes this rule. */
 * {
   box-sizing: border-box;
-}
-
-select,
-input[type='number'],
-input[type='text'] {
-  min-height: 44px;
-  font-size: 1rem;
-  padding: 4px 8px;
 }
 
 .error {
