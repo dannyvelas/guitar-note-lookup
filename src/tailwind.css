@@ -80,29 +80,6 @@
   box-sizing: border-box;
 }
 
-table.fretboard {
-  border-collapse: collapse;
-  touch-action: manipulation;
-}
-
-table.fretboard th,
-table.fretboard td.fret-cell {
-  border: 1px solid var(--border);
-  min-width: 44px;
-  height: 44px;
-  text-align: center;
-  padding: 4px;
-  font-size: 0.85rem;
-}
-
-table.fretboard th {
-  position: sticky;
-  left: 0;
-  background: var(--bg);
-  min-width: 110px;
-  padding: 4px 8px;
-}
-
 .fretboard__string-header {
   display: flex;
   align-items: center;
