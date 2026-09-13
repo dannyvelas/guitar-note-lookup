@@ -4,6 +4,12 @@
   "type": "module",
   "scripts": {
     "start": "node scripts/serve.js",
+    "build:css": "tailwindcss -i ./src/tailwind.css -o ./src/styles.css",
+    "watch:css": "npm run build:css -- --watch",
     "test": "node --test"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
   }
 }
