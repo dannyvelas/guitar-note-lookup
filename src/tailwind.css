@@ -1,0 +1,30 @@
+/* Deliberately NOT `@import "tailwindcss";` — that also pulls in Tailwind's
+   preflight reset (@layer base), which restyles bare <button>/<input>/<select>
+   elements (transparent backgrounds, stripped native chrome, etc.) even before
+   they're migrated to utility classes, since @layer base only loses to
+   unlayered CSS on properties our legacy rules explicitly set. Importing just
+   theme + utilities keeps this migration a true no-op until each element is
+   deliberately converted. */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --color-app-bg: #fafafa;
+  --color-app-fg: #1a1a1a;
+  --color-app-accent: #2f6fed;
+  --color-app-border: #ccc;
+  --color-app-disabled-bg: #eee;
+  --color-app-disabled-fg: #999;
+  --color-app-error: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-app-bg: #14161a;
+    --color-app-fg: #eee;
+    --color-app-border: #444;
+    --color-app-disabled-bg: #22252b;
+    --color-app-disabled-fg: #777;
+  }
+}
