@@ -4,6 +4,7 @@
 @layer theme {
   :root, :host {
     --font-sans: system-ui, -apple-system, sans-serif;
+    --color-white: #fff;
     --spacing: 0.25rem;
     --text-base: 1rem;
     --text-base--line-height: calc(1.5 / 1);
@@ -12,7 +13,9 @@
     --font-weight-bold: 700;
     --color-app-bg: #fafafa;
     --color-app-fg: #1a1a1a;
+    --color-app-accent: #2f6fed;
     --color-app-border: #ccc;
+    --color-app-disabled-bg: #eee;
     --color-app-disabled-fg: #999;
     --color-app-error: #c62828;
   }
@@ -99,6 +102,12 @@
   .border-collapse {
     border-collapse: collapse;
   }
+  .cursor-not-allowed {
+    cursor: not-allowed;
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
   .touch-manipulation {
     touch-action: manipulation;
   }
@@ -127,8 +136,14 @@
   .border-app-border {
     border-color: var(--color-app-border);
   }
+  .bg-app-accent {
+    background-color: var(--color-app-accent);
+  }
   .bg-app-bg {
     background-color: var(--color-app-bg);
+  }
+  .bg-app-disabled-bg {
+    background-color: var(--color-app-disabled-bg);
   }
   .p-1 {
     padding: var(--spacing);
@@ -189,6 +204,13 @@
   }
   .text-app-fg {
     color: var(--color-app-fg);
+  }
+  .text-white {
+    color: var(--color-white);
+  }
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -259,20 +281,6 @@ td.fretboard__result {
 }
 .fretboard__result-button:hover .fretboard__result-cue, .fretboard__result-button:focus-visible .fretboard__result-cue {
   opacity: 1;
-}
-td.fret-cell {
-  cursor: pointer;
-  user-select: none;
-}
-td.fret-cell--disabled {
-  background: var(--disabled-bg);
-  color: var(--disabled-fg);
-  cursor: not-allowed;
-}
-td.fret-cell--selected {
-  background: var(--accent);
-  color: #fff;
-  font-weight: bold;
 }
 #clear-button {
   margin-top: 12px;

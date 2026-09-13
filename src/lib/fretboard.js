@@ -93,17 +93,25 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
 
       for (let fret = 0; fret <= MAX_FRET; fret += 1) {
         const cell = document.createElement('td');
+        const selectable = isFretSelectable(fret, currentCapo);
+        const isSelected = selections[stringIndex] === fret;
+        // Selected implies selectable in practice (setCapo prunes any
+        // selection the new capo makes unselectable), so these two states
+        // never actually overlap — but selected is checked first to match
+        // the old CSS's cascade order (`.fret-cell--selected` came after
+        // `.fret-cell--disabled` in src/styles.css) in case that ever changes.
+        const stateClasses = isSelected
+          ? 'bg-app-accent text-white font-bold'
+          : selectable
+            ? ''
+            : 'bg-app-disabled-bg text-app-disabled-fg';
+        const cursorClass = !selectable && !isSelected ? 'cursor-not-allowed' : 'cursor-pointer';
         cell.className =
-          'fret-cell border border-app-border min-w-11 h-11 text-center p-1 text-[0.85rem]';
+          `border border-app-border min-w-11 h-11 text-center p-1 text-[0.85rem] select-none ${cursorClass}${stateClasses ? ` ${stateClasses}` : ''}`;
         cell.textContent = String(fret);
 
-        const selectable = isFretSelectable(fret, currentCapo);
         if (!selectable) {
-          cell.classList.add('fret-cell--disabled');
           cell.setAttribute('aria-disabled', 'true');
-        }
-        if (selections[stringIndex] === fret) {
-          cell.classList.add('fret-cell--selected');
         }
         if (selectable) {
           cell.addEventListener('click', () => selectFret(stringIndex, fret));
