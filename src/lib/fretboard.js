@@ -26,7 +26,12 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
   let selections = {};
 
   function selectFret(stringIndex, fret) {
-    selections = { ...selections, [stringIndex]: fret };
+    if (selections[stringIndex] === fret) {
+      const { [stringIndex]: _removed, ...rest } = selections;
+      selections = rest;
+    } else {
+      selections = { ...selections, [stringIndex]: fret };
+    }
     render();
   }
 
