@@ -8,10 +8,10 @@
 </head>
 <body class="m-0 p-4 pb-8 font-sans bg-app-bg text-app-fg">
   <header>
-    <h1>Fretboard Chord Note Lookup</h1>
+    <h1 class="text-xl m-0 mb-4">Fretboard Chord Note Lookup</h1>
   </header>
 
-  <section id="settings-panel" aria-label="Tuning and capo settings">
+  <section id="settings-panel" aria-label="Tuning and capo settings" class="mb-6">
     <div class="settings-row">
       <label for="tuning-preset">Tuning</label>
       <select id="tuning-preset">
@@ -28,7 +28,7 @@
     <p id="settings-error" class="error" hidden></p>
   </section>
 
-  <section id="fretboard-section" aria-label="Fretboard, with the resulting note for each string on the right">
+  <section id="fretboard-section" aria-label="Fretboard, with the resulting note for each string on the right" class="mb-6">
     <div id="fretboard"></div>
     <button id="clear-button" type="button">Clear</button>
   </section>

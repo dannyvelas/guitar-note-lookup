@@ -4,6 +4,8 @@
   :root, :host {
     --font-sans: system-ui, -apple-system, sans-serif;
     --spacing: 0.25rem;
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
     --color-app-bg: #fafafa;
     --color-app-fg: #1a1a1a;
   }
@@ -29,6 +31,12 @@
   }
   .m-0 {
     margin: 0px;
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
   }
   .contents {
     display: contents;
@@ -59,6 +67,10 @@
   }
   .font-sans {
     font-family: var(--font-sans);
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
   }
   .text-app-fg {
     color: var(--color-app-fg);
@@ -94,17 +106,6 @@
 }
 * {
   box-sizing: border-box;
-}
-header h1 {
-  font-size: 1.25rem;
-  margin: 0 0 16px;
-}
-section {
-  margin-bottom: 24px;
-}
-h2 {
-  font-size: 1rem;
-  margin: 0 0 8px;
 }
 .settings-row {
   display: flex;
