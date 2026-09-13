@@ -77,15 +77,15 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
       // A `<th>` needs to stay a table-cell to line up with the row's other
       // cells, so the flex layout for its contents lives on this inner div.
       const headerContent = document.createElement('div');
-      headerContent.className = 'fretboard__string-header';
+      headerContent.className = 'flex items-center justify-start gap-1.5 whitespace-nowrap';
 
       const numberLabel = document.createElement('span');
-      numberLabel.className = 'fretboard__string-number';
+      numberLabel.className = 'font-bold text-[0.8rem] shrink-0';
       numberLabel.textContent = `S${stringIndex}`;
 
       const noteInput = document.createElement('input');
       noteInput.type = 'text';
-      noteInput.className = 'fretboard__string-note';
+      noteInput.className = 'w-[3.5em] min-h-8 text-[0.85rem] py-0.5 px-1 text-center';
       noteInput.value = openNoteFor(stringIndex);
       noteInput.setAttribute('aria-label', `String ${stringIndex} open note`);
       noteInput.addEventListener('change', () => {
