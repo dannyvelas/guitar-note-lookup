@@ -80,12 +80,6 @@
   box-sizing: border-box;
 }
 
-.error {
-  color: var(--error);
-  font-size: 0.9rem;
-  margin: 4px 0 0;
-}
-
 #fretboard-section {
   overflow-x: auto;
 }

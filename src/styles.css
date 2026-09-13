@@ -11,6 +11,7 @@
     --color-app-bg: #fafafa;
     --color-app-fg: #1a1a1a;
     --color-app-disabled-fg: #999;
+    --color-app-error: #c62828;
   }
 }
 @layer utilities {
@@ -34,6 +35,9 @@
   }
   .m-0 {
     margin: 0px;
+  }
+  .mt-1 {
+    margin-top: var(--spacing);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -100,11 +104,17 @@
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
+  .text-\[0\.9rem\] {
+    font-size: 0.9rem;
+  }
   .text-\[0\.85rem\] {
     font-size: 0.85rem;
   }
   .text-app-disabled-fg {
     color: var(--color-app-disabled-fg);
+  }
+  .text-app-error {
+    color: var(--color-app-error);
   }
   .text-app-fg {
     color: var(--color-app-fg);
@@ -140,11 +150,6 @@
 }
 * {
   box-sizing: border-box;
-}
-.error {
-  color: var(--error);
-  font-size: 0.9rem;
-  margin: 4px 0 0;
 }
 #fretboard-section {
   overflow-x: auto;
