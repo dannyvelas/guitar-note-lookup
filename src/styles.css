@@ -9,6 +9,7 @@
     --text-base--line-height: calc(1.5 / 1);
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
+    --font-weight-bold: 700;
     --color-app-bg: #fafafa;
     --color-app-fg: #1a1a1a;
     --color-app-border: #ccc;
@@ -77,14 +78,23 @@
   .h-11 {
     height: calc(var(--spacing) * 11);
   }
+  .min-h-8 {
+    min-height: calc(var(--spacing) * 8);
+  }
   .min-h-11 {
     min-height: calc(var(--spacing) * 11);
+  }
+  .w-\[3\.5em\] {
+    width: 3.5em;
   }
   .min-w-11 {
     min-width: calc(var(--spacing) * 11);
   }
   .min-w-\[110px\] {
     min-width: 110px;
+  }
+  .shrink-0 {
+    flex-shrink: 0;
   }
   .border-collapse {
     border-collapse: collapse;
@@ -97,6 +107,12 @@
   }
   .items-center {
     align-items: center;
+  }
+  .justify-start {
+    justify-content: flex-start;
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -120,8 +136,14 @@
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
+  .px-1 {
+    padding-inline: var(--spacing);
+  }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
+  }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
   }
   .py-1 {
     padding-block: var(--spacing);
@@ -143,11 +165,21 @@
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
+  .text-\[0\.8rem\] {
+    font-size: 0.8rem;
+  }
   .text-\[0\.9rem\] {
     font-size: 0.9rem;
   }
   .text-\[0\.85rem\] {
     font-size: 0.85rem;
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
   }
   .text-app-disabled-fg {
     color: var(--color-app-disabled-fg);
@@ -189,25 +221,6 @@
 }
 * {
   box-sizing: border-box;
-}
-.fretboard__string-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 6px;
-  white-space: nowrap;
-}
-.fretboard__string-number {
-  font-weight: bold;
-  font-size: 0.8rem;
-  flex-shrink: 0;
-}
-.fretboard__string-note {
-  width: 3.5em;
-  min-height: 32px;
-  font-size: 0.85rem;
-  padding: 2px 4px;
-  text-align: center;
 }
 td.fretboard__result {
   position: sticky;
@@ -273,10 +286,15 @@ td.fret-cell--selected {
   inherits: false;
   initial-value: solid;
 }
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
+      --tw-font-weight: initial;
     }
   }
 }
