@@ -78,6 +78,9 @@
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
   .bg-app-bg {
     background-color: var(--color-app-bg);
   }
@@ -150,9 +153,6 @@
 }
 * {
   box-sizing: border-box;
-}
-#fretboard-section {
-  overflow-x: auto;
 }
 table.fretboard {
   border-collapse: collapse;

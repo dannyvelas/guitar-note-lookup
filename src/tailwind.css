@@ -80,10 +80,6 @@
   box-sizing: border-box;
 }
 
-#fretboard-section {
-  overflow-x: auto;
-}
-
 table.fretboard {
   border-collapse: collapse;
   touch-action: manipulation;
