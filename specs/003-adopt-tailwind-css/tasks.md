@@ -107,7 +107,9 @@ Every task below is its own PR, in the exact order listed — this order **is** 
 
 **Independent Test**: A clean clone (no `node_modules`) runs via `npm start` or by opening `src/index.html` directly, fully styled, with no install step; `README.md` explains the one new step for people who *do* need to touch styling.
 
-- [ ] T016 [US3] Add a `README.md` at the repository root (none currently exists) with a short "Development" section: `npm start` to run the app, and — only when changing styles — `npm install` once, then `npm run build:css` (or `npm run watch:css` while iterating), committing the regenerated `src/styles.css`; note that `src/styles.css` is generated from `src/tailwind.css` and must not be hand-edited. Verify quickstart.md check 6 (clean-clone zero-install run) still holds.
+- [X] T016 [US3] Add a `README.md` at the repository root (none currently exists) with a short "Development" section: `npm start` to run the app, and — only when changing styles — `npm install` once, then `npm run build:css` (or `npm run watch:css` while iterating), committing the regenerated `src/styles.css`; note that `src/styles.css` is generated from `src/tailwind.css` and must not be hand-edited. Verify quickstart.md check 6 (clean-clone zero-install run) still holds.
+
+**All 16 tasks complete.**
 
 **Checkpoint**: All three user stories are satisfied.
 
