@@ -8,7 +8,7 @@ const MAX_FRET = 24;
 // `table.fretboard th` rule, including its sticky-header override of the
 // shared border rule's min-width/padding (T010).
 const TH_CLASSES =
-  'border border-app-border h-11 text-center text-[0.85rem] sticky left-0 bg-app-bg min-w-[110px] px-2 py-1';
+  'box-border border border-app-border h-11 text-center text-[0.85rem] sticky left-0 bg-app-bg min-w-[110px] px-2 py-1';
 
 /**
  * Renders an interactive 6-string fretboard grid into `container` and owns
@@ -85,7 +85,7 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
 
       const noteInput = document.createElement('input');
       noteInput.type = 'text';
-      noteInput.className = 'w-[3.5em] min-h-8 text-[0.85rem] py-0.5 px-1 text-center';
+      noteInput.className = 'box-border w-[3.5em] min-h-8 text-[0.85rem] py-0.5 px-1 text-center';
       noteInput.value = openNoteFor(stringIndex);
       noteInput.setAttribute('aria-label', `String ${stringIndex} open note`);
       noteInput.addEventListener('change', () => {
@@ -112,7 +112,7 @@ export function createFretboard(container, { capo, tuning, onTuningChange, onStr
             : 'bg-app-disabled-bg text-app-disabled-fg';
         const cursorClass = !selectable && !isSelected ? 'cursor-not-allowed' : 'cursor-pointer';
         cell.className =
-          `border border-app-border min-w-11 h-11 text-center p-1 text-[0.85rem] select-none ${cursorClass}${stateClasses ? ` ${stateClasses}` : ''}`;
+          `box-border border border-app-border min-w-11 h-11 text-center p-1 text-[0.85rem] select-none ${cursorClass}${stateClasses ? ` ${stateClasses}` : ''}`;
         cell.textContent = String(fret);
 
         if (!selectable) {

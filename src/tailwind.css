@@ -36,47 +36,13 @@
   }
 }
 
-/* ---------------------------------------------------------------------
-   Everything below is moved verbatim from the old hand-written
-   src/styles.css (T003). Each rule here is deleted, one self-contained
-   group at a time, as its consumer is converted to Tailwind utility
-   classes in T004-T014 — see specs/003-adopt-tailwind-css/tasks.md.
-   By the end of that phase this whole block should be gone (T015).
-   --------------------------------------------------------------------- */
-
+/* Not expressible as a Tailwind utility, and not dead: tells the browser
+   which native UI theme (form controls, scrollbars, default page
+   background outside content, etc.) to use per color scheme. Everything
+   else that used to live in this app's old :root block (T003) has now
+   been fully replaced by the @theme tokens above and the box-border
+   utilities added directly to each consumer that needed them (T015) —
+   see specs/003-adopt-tailwind-css/research.md and tasks.md. */
 :root {
   color-scheme: light dark;
-  --bg: #fafafa;
-  --fg: #1a1a1a;
-  --accent: #2f6fed;
-  --border: #ccc;
-  --disabled-bg: #eee;
-  --disabled-fg: #999;
-  --error: #c62828;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14161a;
-    --fg: #eee;
-    --border: #444;
-    --disabled-bg: #22252b;
-    --disabled-fg: #777;
-  }
-}
-
-/* Kept intentionally (not deleted by T004, despite tasks.md's original
-   wording) — this is unlayered CSS, so it keeps applying to every element
-   (including ones already converted to utility classes, since none of
-   those utilities touch box-sizing) for as long as this rule exists.
-   Tailwind has no per-element utility for a universal "*" rule, so rather
-   than adding `box-border` piecemeal as each consumer below is converted
-   (T007, T010, T011, T013, T014) — unnecessary busywork, since this rule
-   covers them for free in the meantime — the plan is to add `box-border`
-   to exactly the elements that still need it (inputs/select, table cells,
-   the string-note input, the result button, the clear button) all at once
-   in T015, in the same step that deletes this rule. */
-* {
-  box-sizing: border-box;
-}
-
