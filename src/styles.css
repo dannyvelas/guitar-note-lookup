@@ -56,6 +56,9 @@
   .mt-1 {
     margin-top: var(--spacing);
   }
+  .mt-3 {
+    margin-top: calc(var(--spacing) * 3);
+  }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
   }
@@ -106,6 +109,9 @@
   }
   .min-w-16 {
     min-width: calc(var(--spacing) * 16);
+  }
+  .min-w-24 {
+    min-width: calc(var(--spacing) * 24);
   }
   .min-w-\[110px\] {
     min-width: 110px;
@@ -324,13 +330,6 @@
 }
 * {
   box-sizing: border-box;
-}
-#clear-button {
-  margin-top: 12px;
-  min-height: 44px;
-  min-width: 96px;
-  font-size: 1rem;
-  cursor: pointer;
 }
 @property --tw-border-style {
   syntax: "*";

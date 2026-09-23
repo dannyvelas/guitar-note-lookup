@@ -80,10 +80,3 @@
   box-sizing: border-box;
 }
 
-#clear-button {
-  margin-top: 12px;
-  min-height: 44px;
-  min-width: 96px;
-  font-size: 1rem;
-  cursor: pointer;
-}
